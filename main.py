@@ -119,12 +119,14 @@ def main():
     
 
     # Display a table with clickable links
-    table_html = "<table><tr><th>Username</th><th>Repo Name</th><th>Stars</th><th>Link</th></tr>"
-    for index, row in repos_df.iterrows():
-        table_html += f"<tr><td>{row['username']}</td><td>{row['repo_name']}</td><td>{row['stars']}</td><td><a href='{row['repo_url']}' target='_blank'>Link</a></td></tr>"
-    table_html += "</table>"
+    st.data_editor(
+        repos_df,
+        column_config={
+            "repo_url":st.column_config.LinkColumn()
+        },
+        hide_index=True,
+    )
 
-    st.write(table_html, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
